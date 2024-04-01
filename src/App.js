@@ -1,29 +1,38 @@
 import React, { useState, useEffect } from 'react';
-import { doc, setDoc, getDoc } from 'firebase/firestore';
-import { db } from './firebase'; // Assuming your firebase.js is in the same directory
+import { doc, setDoc, getDoc, onSnapshot } from 'firebase/firestore';
+import { db } from './firebase'; 
 
 const ToggleCircle = ({ text }) => {
   const [color, setColor] = useState('red');
-  const docId = text.toLowerCase(); // Use text argument as docId (converted to lowercase)
+  const docId = text.toLowerCase(); 
 
   useEffect(() => {
+    const circleRef = doc(db, 'circles', docId);
+
     const fetchData = async () => {
       try {
-        const circleRef = doc(db, 'circles', docId);
         const circleSnap = await getDoc(circleRef);
         if (circleSnap.exists()) {
           setColor(circleSnap.data().color);
         } else {
-          // Create a new document with initial color if it doesn't exist
+          
           await setDoc(circleRef, { color: 'red' });
-          setColor('red'); // Set local state to 'red' as it's a new document
+          setColor('red'); 
         }
       } catch (error) {
         console.error('Error fetching or creating document:', error);
       }
     };
 
+    const unsubscribe = onSnapshot(circleRef, (snapshot) => {
+      if (snapshot.exists()) {
+        setColor(snapshot.data().color);
+      }
+    });
+
     fetchData();
+
+    return () => unsubscribe();
   }, [docId]);
 
   const handleClick = async () => {
@@ -31,8 +40,8 @@ const ToggleCircle = ({ text }) => {
       const newColor = color === 'red' ? 'green' : 'red';
       const circleRef = doc(db, 'circles', docId);
       await setDoc(circleRef, { color: newColor }, { merge: true });
-      setColor(newColor); // Update local state after setting Firestore document
-      console.log('Color updated to:', newColor); // Log the updated color
+      setColor(newColor); 
+      console.log('Color updated to:', newColor); 
     } catch (error) {
       console.error('Error updating document:', error);
     }
