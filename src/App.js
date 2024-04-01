@@ -3,7 +3,7 @@ import { doc, setDoc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from './firebase'; 
 
 const ToggleCircle = ({ text }) => {
-  const [color, setColor] = useState('red');
+  const [color, setColor] = useState('blue');
   const docId = text.toLowerCase(); 
 
   useEffect(() => {
@@ -15,9 +15,8 @@ const ToggleCircle = ({ text }) => {
         if (circleSnap.exists()) {
           setColor(circleSnap.data().color);
         } else {
-          
-          await setDoc(circleRef, { color: 'red' });
-          setColor('red'); 
+          await setDoc(circleRef, { color: 'green' });
+          setColor('green'); 
         }
       } catch (error) {
         console.error('Error fetching or creating document:', error);
