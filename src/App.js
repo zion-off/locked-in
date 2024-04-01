@@ -3,7 +3,7 @@ import { doc, setDoc, getDoc, onSnapshot } from 'firebase/firestore';
 import { db } from './firebase'; 
 
 const ToggleCircle = ({ text }) => {
-  const [color, setColor] = useState('blue');
+  const [color, setColor] = useState('green');
   const docId = text.toLowerCase(); 
 
   useEffect(() => {
