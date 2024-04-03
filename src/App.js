@@ -2,13 +2,15 @@ import React, { useState, useEffect }  from "react";
 import ToggleCircle from "./component";
 import haadi from "./haadi.jpg";
 import zein from "./zein.jpg";
+import momo from "./momo.jpg";
+import yazi from "./yazi.png";
 
 const App = () => {
   const [randomImage, setRandomImage] = useState(null);
 
   useEffect(() => {
     
-    const imagesArray = [haadi, zein];
+    const imagesArray = [haadi, zein, momo, yazi];
 
     
     const randomIndex = Math.floor(Math.random() * imagesArray.length);
