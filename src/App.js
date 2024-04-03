@@ -4,18 +4,14 @@ import haadi from "./haadi.jpg";
 import zein from "./zein.jpg";
 import momo from "./momo.jpg";
 import yazi from "./yazi.png";
+import malak from "./malak.jpg";
 
 const App = () => {
   const [randomImage, setRandomImage] = useState(null);
 
   useEffect(() => {
-    
-    const imagesArray = [haadi, zein, momo, yazi];
-
-    
+    const imagesArray = [haadi, zein, momo, yazi, malak];
     const randomIndex = Math.floor(Math.random() * imagesArray.length);
-
-    
     setRandomImage(imagesArray[randomIndex]);
   }, []);
 
