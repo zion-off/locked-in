@@ -8,6 +8,7 @@ import malak from "./malak.jpg";
 
 const App = () => {
   const [randomImage, setRandomImage] = useState(null);
+  const showAds = false;
 
   useEffect(() => {
     const imagesArray = [haadi, zein, momo, yazi, malak];
@@ -37,7 +38,7 @@ const App = () => {
       <ToggleCircle text="malak" />
       <ToggleCircle text="khadija" />
 
-      {randomImage && (
+      {showAds && randomImage && (
         <img
           src={randomImage}
           alt="ad"
