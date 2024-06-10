@@ -29,6 +29,7 @@ const App = () => {
         backgroundColor: "black",
       }}>
       <ToggleCircle text="zion" />
+      <ToggleCircle text="awad" />
       <ToggleCircle text="zein" />
       <ToggleCircle text="hind" />
       <ToggleCircle text="haadi" />
